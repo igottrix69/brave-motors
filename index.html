@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brave Motors — Premium Vehicle Dealership | Papua New Guinea</title>
+  <meta name="description" content="Brave Motors, the automotive division of Brave Group (PNG) Ltd. Premium, PNG-ready vehicles — Land Cruiser 70/76/79 Series, Hilux Travo, Kia Optima, Foton V9 — with genuine dealer support." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230a0c0f'/%3E%3Ctext x='32' y='44' font-family='Arial Black' font-size='34' font-weight='900' text-anchor='middle' fill='%23e11d2e'%3EV%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="container">
+      <div class="tb-left">Your trusted partner in Construction · Security &amp; Automation</div>
+      <div class="tb-right">
+        <a id="tb-phone" href="tel:+67579988842">+675 7998 8842</a>
+        <a id="tb-email" href="mailto:support@pngbravegroup.com">support@pngbravegroup.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="container">
+      <a class="brand" href="#home">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="bm-flame" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#F6C544"/><stop offset=".55" stop-color="#F08C1E"/><stop offset="1" stop-color="#E11D2E"/>
+            </linearGradient>
+          </defs>
+          <circle cx="32" cy="32" r="26" fill="none" stroke="url(#bm-flame)" stroke-width="5" stroke-dasharray="9 4.5" stroke-linecap="round"/>
+          <circle cx="32" cy="32" r="17" fill="#11141a" stroke="#2a2f38" stroke-width="1.5"/>
+          <path d="M24 25 L32 42 L40 25" fill="none" stroke="#E11D2E" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name">BRA<em>V</em>E</span>
+          <span class="brand-sub">MOTORS</span>
+        </span>
+      </a>
+      <nav>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home" data-route="home">HOME</a></li>
+          <li><a href="#vehicles" data-route="vehicles">VEHICLES FOR SALE</a></li>
+          <li><a href="#blog" data-route="blog">BLOG</a></li>
+          <li><a href="#vision" data-route="vision">BRAVE GROUP VISION</a></li>
+          <li><a href="#about" data-route="about">ABOUT US</a></li>
+          <li><a href="#contact" data-route="contact">CONTACT US</a></li>
+        </ul>
+      </nav>
+      <button class="nav-cta" onclick="location.hash='#contact'">ENQUIRE NOW</button>
+      <button class="nav-burger" id="nav-burger" aria-label="Menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HOME ============ -->
+    <section class="page" id="page-home">
+      <div class="hero">
+        <div class="container">
+          <div class="hero-inner">
+            <span class="kicker" id="hero-kicker">Brave Group (PNG) Ltd · Automotive Division</span>
+            <h1 id="hero-title">Premium vehicles. <span class="accent">Built for Papua New Guinea.</span></h1>
+            <p id="hero-sub"></p>
+            <div class="hero-actions">
+              <button class="btn btn-red" onclick="location.hash='#vehicles'">BROWSE VEHICLES →</button>
+              <button class="btn btn-ghost" onclick="location.hash='#contact'">BOOK A TEST DRIVE</button>
+            </div>
+          </div>
+        </div>
+        <div class="hero-strip" style="position:absolute;bottom:0;left:0;right:0;">
+          <div class="container">
+            <div class="stats-row" id="stats-row"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="container">
+          <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;max-width:none;flex-wrap:wrap;">
+            <div>
+              <span class="kicker">Featured Stock</span>
+              <h2>Hand-picked for PNG conditions.</h2>
+            </div>
+            <button class="btn btn-ghost btn-sm" onclick="location.hash='#vehicles'">VIEW ALL VEHICLES →</button>
+          </div>
+          <div class="veh-grid" id="featured-grid"></div>
+        </div>
+      </div>
+
+      <div class="section tight" style="background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+        <div class="container">
+          <div class="section-head">
+            <span class="kicker">Why Brave Motors</span>
+            <h2>Buy with confidence. Drive with pride.</h2>
+          </div>
+          <div class="feat-grid">
+            <div class="feat"><div class="ico">🛡</div><h3>Trusted Nationwide</h3><p>Backed by Brave Group (PNG) Ltd — a name PNG businesses and families already rely on.</p></div>
+            <div class="feat"><div class="ico">🔧</div><h3>After-Sales Support</h3><p>Genuine support after you buy: servicing guidance, parts assistance and a team that answers.</p></div>
+            <div class="feat"><div class="ico">🤝</div><h3>Honest, Transparent Deals</h3><p>Clear pricing and straight answers. No pressure, no hidden surprises — just respect.</p></div>
+            <div class="feat"><div class="ico">⛰</div><h3>PNG-Ready Vehicles</h3><p>Every vehicle is selected and prepared for PNG roads — from city streets to highland tracks.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="container">
+          <div class="group-banner">
+            <div>
+              <span class="kicker">Brave Group (PNG) Ltd</span>
+              <h2>One group. One promise. Building, protecting and moving PNG.</h2>
+              <p>Brave Motors is part of something bigger — discover the vision driving every division of Brave Group.</p>
+            </div>
+            <button class="btn btn-gold" style="flex:none;" onclick="location.hash='#vision'">OUR VISION →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section tight" style="padding-top:10px;">
+        <div class="container">
+          <div class="section-head" style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;max-width:none;flex-wrap:wrap;">
+            <div>
+              <span class="kicker">Latest News</span>
+              <h2>From the Brave Motors blog.</h2>
+            </div>
+            <button class="btn btn-ghost btn-sm" onclick="location.hash='#blog'">ALL ARTICLES →</button>
+          </div>
+          <div class="post-grid" id="home-posts"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VEHICLES ============ -->
+    <section class="page" id="page-vehicles">
+      <div class="section">
+        <div class="container">
+          <div class="section-head">
+            <span class="kicker">Vehicles For Sale</span>
+            <h2>Current stock.</h2>
+            <p>Every vehicle is inspected, PNG-prepared and backed by the Brave Motors team. Prices on application — enquire for today's best price.</p>
+          </div>
+          <div class="filter-row" id="filter-row"></div>
+          <div class="veh-grid" id="vehicles-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BLOG ============ -->
+    <section class="page" id="page-blog">
+      <div class="section">
+        <div class="container">
+          <div id="blog-list">
+            <div class="section-head">
+              <span class="kicker">Blog</span>
+              <h2>News, advice &amp; stories.</h2>
+              <p>Buying guides, vehicle news and updates from the Brave Motors team.</p>
+            </div>
+            <div class="post-grid" id="blog-grid"></div>
+          </div>
+          <div id="blog-reader" class="reader" style="display:none;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VISION ============ -->
+    <section class="page" id="page-vision">
+      <div class="section">
+        <div class="container">
+          <div class="section-head">
+            <span class="kicker">Brave Group Vision</span>
+            <h2 id="vision-title">The Brave Group vision.</h2>
+          </div>
+          <div class="split">
+            <div>
+              <div class="statement" id="vision-statement"></div>
+              <div class="prose" id="vision-body"></div>
+            </div>
+            <div class="pillars" id="vision-pillars"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="page" id="page-about">
+      <div class="section">
+        <div class="container">
+          <div class="section-head">
+            <span class="kicker">About Us</span>
+            <h2 id="about-title">A dealership PNG can count on.</h2>
+          </div>
+          <div class="split">
+            <div>
+              <div class="prose" id="about-body"></div>
+              <ul class="check-list" id="about-points"></ul>
+            </div>
+            <div class="info-card" id="about-info"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="page" id="page-contact">
+      <div class="section">
+        <div class="container">
+          <div class="section-head">
+            <span class="kicker">Contact Us</span>
+            <h2>Let's get you on the road.</h2>
+            <p>Send us a message and the Brave Motors team will get back to you — usually within one business day.</p>
+          </div>
+          <div class="contact-grid">
+            <div class="form-card">
+              <form id="contact-form">
+                <div class="field">
+                  <label for="cf-name">Your Name</label>
+                  <input type="text" id="cf-name" name="name" required placeholder="e.g. John Kaupa" />
+                </div>
+                <div class="field">
+                  <label for="cf-email">Email Address</label>
+                  <input type="email" id="cf-email" name="email" required placeholder="you@example.com" />
+                </div>
+                <div class="field">
+                  <label for="cf-message">Message</label>
+                  <textarea id="cf-message" name="message" required placeholder="Tell us which vehicle you're interested in, or how we can help…"></textarea>
+                </div>
+                <button type="submit" class="btn btn-red" id="cf-submit" style="width:100%;justify-content:center;">SEND MESSAGE</button>
+                <p class="form-note">Your message goes directly to <b id="cf-note-email">support@pngbravegroup.com</b>.</p>
+              </form>
+            </div>
+            <div class="info-card" id="contact-info"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="#home" style="margin-bottom:6px;">
+            <span class="brand-text">
+              <span class="brand-name">BRA<em>V</em>E</span>
+              <span class="brand-sub">MOTORS</span>
+            </span>
+          </a>
+          <p class="blurb">The automotive division of Brave Group (PNG) Ltd — your trusted partner in construction, security &amp; automation.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#vehicles">Vehicles For Sale</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#vision">Brave Group Vision</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="https://bravegrouppng.com/" target="_blank" rel="noopener">Brave Group (PNG) Ltd</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact Brave Motors</h4>
+          <ul>
+            <li>📧 <a id="ft-email" href="mailto:support@pngbravegroup.com">support@pngbravegroup.com</a></li>
+            <li>📞 <a id="ft-phone" href="tel:+67579988842">+675 7998 8842</a></li>
+            <li id="ft-location">📍 Port Moresby, Papua New Guinea</li>
+            <li id="ft-hours">🕘 Mon–Fri 8:00am – 5:00pm</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span id="ft-copy">© 2026 Brave Motors · Brave Group (PNG) Ltd. All rights reserved.</span>
+        <a class="admin-link" href="admin.html">🔒 STAFF LOGIN</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vehicle detail modal -->
+  <div class="modal-wrap" id="veh-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeVehicleModal()">✕</button>
+      <div class="modal-media"><img id="vm-img" alt="" /></div>
+      <div class="modal-body">
+        <div class="veh-cat" id="vm-cat"></div>
+        <h3 id="vm-name"></h3>
+        <div class="veh-specs" id="vm-specs"></div>
+        <p id="vm-desc"></p>
+        <div class="veh-foot" style="border-top:1px solid var(--line);">
+          <div class="veh-price" id="vm-price">POA<small>PRICE ON APPLICATION</small></div>
+          <button class="btn btn-red" id="vm-enquire">ENQUIRE NOW →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/store.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

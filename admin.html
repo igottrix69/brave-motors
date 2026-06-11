@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brave Motors — Admin Dashboard</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Saira:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230a0c0f'/%3E%3Ctext x='32' y='44' font-family='Arial Black' font-size='34' font-weight='900' text-anchor='middle' fill='%23e5a33b'%3EV%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- ============ PIN LOCK ============ -->
+  <div class="lock-screen" id="lock-screen">
+    <div class="lock-card" id="lock-card">
+      <span class="brand-name">BRA<em>V</em>E</span>
+      <span class="brand-sub">MOTORS ADMIN</span>
+      <h1>Staff Access Only</h1>
+      <p class="sub">Enter your PIN code to open the dashboard</p>
+      <div class="pin-dots" id="pin-dots"></div>
+      <div class="pin-pad" id="pin-pad">
+        <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
+        <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
+        <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
+        <button class="fn" data-k="clear">CLEAR</button><button data-k="0">0</button><button class="fn" data-k="back">⌫</button>
+      </div>
+      <div class="lock-err" id="lock-err"></div>
+      <a class="lock-back" href="index.html">← Back to website</a>
+    </div>
+  </div>
+
+  <!-- ============ APP ============ -->
+  <div class="app" id="app">
+    <aside class="sidebar">
+      <div class="brand-wrap">
+        <span class="brand-name">BRA<em>V</em>E</span>
+        <span class="brand-sub">MOTORS ADMIN</span>
+      </div>
+      <button class="snav active" data-panel="dashboard">📊 Dashboard</button>
+      <button class="snav" data-panel="vehicles">🚙 Vehicles</button>
+      <button class="snav" data-panel="blog">📝 Blog Posts</button>
+      <button class="snav" data-panel="content">🎨 Site Content</button>
+      <button class="snav" data-panel="messages">📨 Messages <span class="badge" id="msg-badge" style="display:none">0</span></button>
+      <button class="snav" data-panel="settings">⚙️ Settings</button>
+      <div class="spacer"></div>
+      <div class="foot">
+        <a class="snav" href="index.html" target="_blank">🌐 View Site</a>
+        <button class="snav" id="logout-btn">🚪 Log Out</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <!-- ===== Dashboard ===== -->
+      <section class="panel active" id="panel-dashboard">
+        <div class="main-head">
+          <div>
+            <h1>Dashboard</h1>
+            <div class="sub">Welcome back. Here's how Brave Motors is looking.</div>
+          </div>
+          <button class="btn btn-red" onclick="AdminUI.openVehicleForm()">+ ADD VEHICLE</button>
+        </div>
+        <div class="stat-grid" id="dash-stats"></div>
+        <div class="card">
+          <h2>Quick Actions</h2>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn btn-ghost btn-sm" onclick="AdminUI.go('vehicles')">Manage vehicles</button>
+            <button class="btn btn-ghost btn-sm" onclick="AdminUI.openPostForm()">Write a blog post</button>
+            <button class="btn btn-ghost btn-sm" onclick="AdminUI.go('content')">Edit homepage text</button>
+            <button class="btn btn-ghost btn-sm" onclick="AdminUI.go('messages')">Read messages</button>
+            <button class="btn btn-ghost btn-sm" onclick="AdminUI.go('settings')">Change PIN</button>
+          </div>
+        </div>
+        <div class="card">
+          <h2>Recent Messages <span class="hint">latest enquiries from the contact form</span></h2>
+          <div id="dash-messages"></div>
+        </div>
+      </section>
+
+      <!-- ===== Vehicles ===== -->
+      <section class="panel" id="panel-vehicles">
+        <div class="main-head">
+          <div>
+            <h1>Vehicles</h1>
+            <div class="sub">Add, edit, feature or remove vehicles shown on the website.</div>
+          </div>
+          <button class="btn btn-red" onclick="AdminUI.openVehicleForm()">+ ADD VEHICLE</button>
+        </div>
+        <div class="card" id="vehicle-list"></div>
+      </section>
+
+      <!-- ===== Blog ===== -->
+      <section class="panel" id="panel-blog">
+        <div class="main-head">
+          <div>
+            <h1>Blog Posts</h1>
+            <div class="sub">Publish news, buying guides and updates.</div>
+          </div>
+          <button class="btn btn-red" onclick="AdminUI.openPostForm()">+ NEW POST</button>
+        </div>
+        <div class="card" id="post-list"></div>
+      </section>
+
+      <!-- ===== Content ===== -->
+      <section class="panel" id="panel-content">
+        <div class="main-head">
+          <div>
+            <h1>Site Content</h1>
+            <div class="sub">Edit the text shown across the website. Changes go live the moment you save.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Homepage Hero</h2>
+          <div class="field"><label>Kicker (small line above the title)</label><input id="c-heroKicker" /></div>
+          <div class="field"><label>Headline <span style="text-transform:none;letter-spacing:0;">— text after the first full stop is highlighted in gold</span></label><input id="c-heroTitle" /></div>
+          <div class="field"><label>Sub-headline</label><textarea id="c-heroSub"></textarea></div>
+          <h2 style="margin-top:26px;">Homepage Stats Bar</h2>
+          <div id="c-stats"></div>
+          <button class="btn btn-gold" onclick="AdminUI.saveHero()">SAVE HOMEPAGE</button>
+        </div>
+
+        <div class="card">
+          <h2>About Us Page</h2>
+          <div class="field"><label>Title</label><input id="c-aboutTitle" /></div>
+          <div class="field"><label>Body <span style="text-transform:none;letter-spacing:0;">— blank line = new paragraph</span></label><textarea id="c-aboutBody" style="min-height:170px;"></textarea></div>
+          <div class="field"><label>Checklist points (one per line)</label><textarea id="c-aboutPoints"></textarea></div>
+          <button class="btn btn-gold" onclick="AdminUI.saveAbout()">SAVE ABOUT PAGE</button>
+        </div>
+
+        <div class="card">
+          <h2>Brave Group Vision Page</h2>
+          <div class="field"><label>Title</label><input id="c-visionTitle" /></div>
+          <div class="field"><label>Vision statement (the big quote)</label><textarea id="c-visionStatement"></textarea></div>
+          <div class="field"><label>Body</label><textarea id="c-visionBody" style="min-height:150px;"></textarea></div>
+          <div id="c-pillars"></div>
+          <button class="btn btn-gold" onclick="AdminUI.saveVision()">SAVE VISION PAGE</button>
+        </div>
+
+        <div class="card">
+          <h2>Contact Details <span class="hint">shown in the header, footer, contact &amp; about pages</span></h2>
+          <div class="frow">
+            <div class="field"><label>Email (also receives contact-form messages)</label><input id="c-email" /></div>
+            <div class="field"><label>Phone</label><input id="c-phone" /></div>
+          </div>
+          <div class="frow">
+            <div class="field"><label>Location</label><input id="c-location" /></div>
+            <div class="field"><label>Opening hours</label><input id="c-hours" /></div>
+          </div>
+          <button class="btn btn-gold" onclick="AdminUI.saveContact()">SAVE CONTACT DETAILS</button>
+        </div>
+      </section>
+
+      <!-- ===== Messages ===== -->
+      <section class="panel" id="panel-messages">
+        <div class="main-head">
+          <div>
+            <h1>Messages</h1>
+            <div class="sub">Enquiries submitted through the website contact form on this device. All messages are also emailed to your support inbox.</div>
+          </div>
+          <button class="btn btn-ghost" onclick="AdminUI.markAllRead()">MARK ALL READ</button>
+        </div>
+        <div id="message-list"></div>
+      </section>
+
+      <!-- ===== Settings ===== -->
+      <section class="panel" id="panel-settings">
+        <div class="main-head">
+          <div>
+            <h1>Settings</h1>
+            <div class="sub">Security and site data management.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>🔒 Change Admin PIN</h2>
+          <div class="frow-3">
+            <div class="field"><label>Current PIN</label><input id="pin-current" type="password" inputmode="numeric" maxlength="8" placeholder="••••" /></div>
+            <div class="field"><label>New PIN (4–8 digits)</label><input id="pin-new" type="password" inputmode="numeric" maxlength="8" placeholder="••••" /></div>
+            <div class="field"><label>Confirm New PIN</label><input id="pin-confirm" type="password" inputmode="numeric" maxlength="8" placeholder="••••" /></div>
+          </div>
+          <button class="btn btn-red" onclick="AdminUI.changePin()">UPDATE PIN</button>
+        </div>
+
+        <div class="card">
+          <h2>💾 Backup &amp; Restore</h2>
+          <p style="color:var(--muted);font-size:13.5px;margin-bottom:16px;">
+            Website edits are saved in this browser. Export a backup file to keep your changes safe or move them to another computer, then import it there.
+          </p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn btn-ghost" onclick="AdminUI.exportData()">⬇ EXPORT BACKUP</button>
+            <button class="btn btn-ghost" onclick="document.getElementById('import-file').click()">⬆ IMPORT BACKUP</button>
+            <input type="file" id="import-file" accept=".json" style="display:none;" />
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>⚠️ Danger Zone</h2>
+          <p style="color:var(--muted);font-size:13.5px;margin-bottom:16px;">
+            Reset every edit (vehicles, posts, text, contact details and PIN) back to the original website defaults. This cannot be undone.
+          </p>
+          <button class="btn btn-danger" onclick="AdminUI.resetAll()">RESET WEBSITE TO DEFAULTS</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ===== Vehicle form modal ===== -->
+  <div class="modal-wrap" id="vehicle-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="AdminUI.closeModal('vehicle-modal')">✕</button>
+      <h2 id="vf-title">Add Vehicle</h2>
+      <div class="frow">
+        <div class="field"><label>Vehicle Name</label><input id="vf-name" placeholder="e.g. Toyota Land Cruiser 79 Series" /></div>
+        <div class="field"><label>Category</label>
+          <select id="vf-category">
+            <option>Heavy-Duty 4WD</option>
+            <option>Ute</option>
+            <option>SUV</option>
+            <option>Sedan</option>
+            <option>People Mover</option>
+            <option>Truck</option>
+          </select>
+        </div>
+      </div>
+      <div class="frow-3">
+        <div class="field"><label>Year</label><input id="vf-year" placeholder="2025" /></div>
+        <div class="field"><label>Price</label><input id="vf-price" placeholder="POA" /></div>
+        <div class="field"><label>Status</label>
+          <select id="vf-status"><option>Available</option><option>Incoming</option><option>Sold</option></select>
+        </div>
+      </div>
+      <div class="field"><label>Key specs (comma separated)</label><input id="vf-specs" placeholder="Turbo diesel, 4WD, Double cab" /></div>
+      <div class="field"><label>Description</label><textarea id="vf-desc"></textarea></div>
+      <div class="field">
+        <label>Photo</label>
+        <div class="img-drop">
+          <img id="vf-preview" alt="" />
+          <div class="meta">
+            <b>Vehicle photo</b>
+            <span>Upload a photo (JPG/PNG) — it is resized automatically. Leave empty to use the branded placeholder.</span>
+          </div>
+          <div class="btns">
+            <button class="btn btn-ghost btn-sm" onclick="document.getElementById('vf-image-file').click()">UPLOAD</button>
+            <button class="btn btn-danger btn-sm" onclick="AdminUI.clearVehicleImage()">REMOVE</button>
+          </div>
+          <input type="file" id="vf-image-file" accept="image/*" style="display:none;" />
+        </div>
+      </div>
+      <label class="check"><input type="checkbox" id="vf-featured" /> Feature this vehicle on the homepage</label>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" onclick="AdminUI.closeModal('vehicle-modal')">CANCEL</button>
+        <button class="btn btn-red" onclick="AdminUI.saveVehicle()">SAVE VEHICLE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Post form modal ===== -->
+  <div class="modal-wrap" id="post-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="AdminUI.closeModal('post-modal')">✕</button>
+      <h2 id="pf-title">New Blog Post</h2>
+      <div class="field"><label>Title</label><input id="pf-name" /></div>
+      <div class="frow">
+        <div class="field"><label>Author</label><input id="pf-author" placeholder="Brave Motors Team" /></div>
+        <div class="field"><label>Date</label><input id="pf-date" type="date" /></div>
+      </div>
+      <div class="field"><label>Excerpt (short teaser shown on cards)</label><textarea id="pf-excerpt" style="min-height:70px;"></textarea></div>
+      <div class="field"><label>Article body <span style="text-transform:none;letter-spacing:0;">— blank line = new paragraph</span></label><textarea id="pf-body" style="min-height:190px;"></textarea></div>
+      <div class="field">
+        <label>Cover image (optional)</label>
+        <div class="img-drop">
+          <img id="pf-preview" alt="" />
+          <div class="meta">
+            <b>Cover image</b>
+            <span>Shown on the blog card and at the top of the article.</span>
+          </div>
+          <div class="btns">
+            <button class="btn btn-ghost btn-sm" onclick="document.getElementById('pf-image-file').click()">UPLOAD</button>
+            <button class="btn btn-danger btn-sm" onclick="AdminUI.clearPostImage()">REMOVE</button>
+          </div>
+          <input type="file" id="pf-image-file" accept="image/*" style="display:none;" />
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-ghost" onclick="AdminUI.closeModal('post-modal')">CANCEL</button>
+        <button class="btn btn-red" onclick="AdminUI.savePost()">PUBLISH POST</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/store.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
