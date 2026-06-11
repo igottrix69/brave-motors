@@ -126,6 +126,57 @@ h1, h2, h3 { font-family: var(--font-display); line-height: 1.12; }
 .section-head h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: 0.5px; }
 .section-head p { color: var(--muted); margin-top: 14px; font-size: 16.5px; }
 
+/* ---------- Hero image slider ---------- */
+.hero-slider {
+  padding: 30px 0 38px;
+  background: linear-gradient(180deg, #0c0e13, #0a0c0f);
+}
+.hs-frame {
+  position: relative; width: 100%;
+  aspect-ratio: 1672 / 941; max-height: 80vh;
+  border-radius: 18px; overflow: hidden; background: var(--surface-2);
+  animation: hsGlow 5s ease-in-out infinite;
+}
+@keyframes hsGlow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.35),
+      0 0 22px rgba(195, 222, 255, 0.32),
+      0 0 60px rgba(165, 200, 255, 0.16);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.55),
+      0 0 34px rgba(205, 228, 255, 0.5),
+      0 0 90px rgba(175, 208, 255, 0.26);
+  }
+}
+.hs-track { position: absolute; inset: 0; }
+.hs-slide {
+  position: absolute; inset: 0; opacity: 0;
+  transition: opacity 0.9s ease; pointer-events: none;
+}
+.hs-slide.active { opacity: 1; pointer-events: auto; }
+.hs-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hs-nav { position: absolute; bottom: 18px; right: 18px; display: flex; gap: 10px; z-index: 6; }
+.hs-arrow {
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(10, 12, 15, 0.55); backdrop-filter: blur(6px);
+  color: #fff; font-size: 24px; line-height: 1; padding-bottom: 3px;
+  display: grid; place-items: center;
+  transition: border-color 0.2s, color 0.2s, transform 0.15s, background 0.2s;
+}
+.hs-arrow:hover {
+  border-color: var(--gold); color: var(--gold-soft);
+  background: rgba(10, 12, 15, 0.75); transform: translateY(-2px);
+}
+@media (max-width: 640px) {
+  .hero-slider { padding: 18px 0 24px; }
+  .hs-frame { aspect-ratio: 4 / 3; }
+  .hs-arrow { width: 40px; height: 40px; font-size: 20px; }
+}
+
 /* ---------- Hero ---------- */
 .hero {
   position: relative; overflow: hidden;

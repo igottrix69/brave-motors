@@ -92,13 +92,13 @@
   });
 
   /* ============ Image helper ============ */
-  function readImage(file, cb) {
+  function readImage(file, cb, maxWidth) {
     if (!file || !file.type.startsWith('image/')) { toast('Please choose an image file.', true); return; }
     const reader = new FileReader();
     reader.onload = () => {
       const img = new Image();
       img.onload = () => {
-        const MAX = 1280;
+        const MAX = maxWidth || 1280;
         let { width, height } = img;
         if (width > MAX) { height = Math.round(height * MAX / width); width = MAX; }
         const canvas = document.createElement('canvas');
@@ -143,6 +143,77 @@
           '<button class="btn btn-ghost btn-sm" onclick="AdminUI.go(\'messages\')">VIEW</button></div>'
         ).join('')
       : '<div class="empty">No messages yet. Enquiries from the contact form will appear here.</div>';
+  }
+
+  /* ============ Hero slider ============ */
+  const HERO_MAX_WIDTH = 1672;
+  let replacingSlideId = null;
+
+  function renderHeroSlides() {
+    const slides = data.heroSlides || [];
+    $('#hero-list').innerHTML = slides.length
+      ? slides.map((s, i) =>
+          '<div class="list-row">' +
+          '<img class="thumb" style="width:150px;height:84px;" src="' + s.image + '" alt="" />' +
+          '<div class="grow"><div class="title">Slide ' + (i + 1) + (i === 0 ? '<span class="tag gold">SHOWS FIRST</span>' : '') + '</div>' +
+          '<div class="meta">Recommended size: 1672 × 941 px</div></div>' +
+          '<div class="actions">' +
+          (i > 0 ? '<button class="btn btn-ghost btn-sm" onclick="AdminUI.moveHeroSlide(\'' + s.id + '\',-1)" title="Move earlier">↑</button>' : '') +
+          (i < slides.length - 1 ? '<button class="btn btn-ghost btn-sm" onclick="AdminUI.moveHeroSlide(\'' + s.id + '\',1)" title="Move later">↓</button>' : '') +
+          '<button class="btn btn-ghost btn-sm" onclick="AdminUI.replaceHeroSlide(\'' + s.id + '\')">REPLACE IMAGE</button>' +
+          '<button class="btn btn-danger btn-sm" onclick="AdminUI.deleteHeroSlide(\'' + s.id + '\')">DELETE</button>' +
+          '</div></div>'
+        ).join('')
+      : '<div class="empty">No hero images. Click “+ ADD HERO IMAGE” to upload your first slide (1672 × 941 px recommended).</div>';
+  }
+
+  $('#hs-add-file').addEventListener('change', function () {
+    readImage(this.files[0], (dataUrl) => {
+      data.heroSlides = data.heroSlides || [];
+      data.heroSlides.push({ id: BMStore.uid('h'), image: dataUrl, alt: 'Brave Motors vehicle' });
+      persist();
+      renderHeroSlides();
+      toast('✓ Hero image added — it is now in the homepage rotation.');
+    }, HERO_MAX_WIDTH);
+    this.value = '';
+  });
+
+  $('#hs-replace-file').addEventListener('change', function () {
+    const slide = (data.heroSlides || []).find(s => s.id === replacingSlideId);
+    if (!slide) { this.value = ''; return; }
+    readImage(this.files[0], (dataUrl) => {
+      slide.image = dataUrl;
+      persist();
+      renderHeroSlides();
+      toast('✓ Hero image replaced.');
+    }, HERO_MAX_WIDTH);
+    this.value = '';
+  });
+
+  function replaceHeroSlide(id) {
+    replacingSlideId = id;
+    document.getElementById('hs-replace-file').click();
+  }
+
+  function moveHeroSlide(id, dir) {
+    const slides = data.heroSlides || [];
+    const i = slides.findIndex(s => s.id === id);
+    const j = i + dir;
+    if (i < 0 || j < 0 || j >= slides.length) return;
+    [slides[i], slides[j]] = [slides[j], slides[i]];
+    persist();
+    renderHeroSlides();
+  }
+
+  function deleteHeroSlide(id) {
+    const slides = data.heroSlides || [];
+    const i = slides.findIndex(s => s.id === id);
+    if (i < 0) return;
+    if (!confirm('Remove slide ' + (i + 1) + ' from the homepage hero rotation?')) return;
+    slides.splice(i, 1);
+    persist();
+    renderHeroSlides();
+    toast('Hero image removed.');
   }
 
   /* ============ Vehicles ============ */
@@ -497,6 +568,7 @@
   /* ============ Render all ============ */
   function renderAll() {
     renderDashboard();
+    renderHeroSlides();
     renderVehicles();
     renderPosts();
     renderContentForms();
@@ -506,6 +578,7 @@
   /* ============ Public API ============ */
   window.AdminUI = {
     go, closeModal,
+    replaceHeroSlide, moveHeroSlide, deleteHeroSlide,
     openVehicleForm, saveVehicle, deleteVehicle, clearVehicleImage,
     openPostForm, savePost, deletePost, clearPostImage,
     saveHero, saveAbout, saveVision, saveContact,

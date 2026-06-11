@@ -17,6 +17,13 @@
       location: 'Port Moresby, Papua New Guinea',
       hours: 'Mon–Fri 8:00am – 5:00pm · Sat 9:00am – 1:00pm'
     },
+    heroSlides: [
+      { id: 'h-1', image: 'assets/hero/hero-1.webp', alt: 'Toyota Land Cruiser 76 Series at sunset' },
+      { id: 'h-2', image: 'assets/hero/hero-2.webp', alt: 'Foton V9 on the beach at sunset' },
+      { id: 'h-3', image: 'assets/hero/hero-3.webp', alt: 'Toyota Land Cruiser troop carrier ambulance' },
+      { id: 'h-4', image: 'assets/hero/hero-4.webp', alt: 'Kia Sportage pair over Port Moresby at dusk' },
+      { id: 'h-5', image: 'assets/hero/hero-5.webp', alt: 'Toyota Hilux Travo Overland — built for PNG' }
+    ],
     content: {
       heroKicker: 'BRAVE GROUP (PNG) LTD · AUTOMOTIVE DIVISION',
       heroTitle: 'Premium vehicles. Built for Papua New Guinea.',

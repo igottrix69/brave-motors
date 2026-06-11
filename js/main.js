@@ -49,6 +49,38 @@
     toastTimer = setTimeout(() => t.classList.remove('show'), 4200);
   }
 
+  /* ---------- Hero image slider ---------- */
+  let hsIndex = 0;
+  let hsTimer = null;
+
+  function hsSet(i) {
+    const slides = document.querySelectorAll('.hs-slide');
+    if (!slides.length) return;
+    hsIndex = (i + slides.length) % slides.length;
+    slides.forEach((s, n) => s.classList.toggle('active', n === hsIndex));
+  }
+
+  function hsRestartTimer() {
+    clearInterval(hsTimer);
+    hsTimer = setInterval(() => hsSet(hsIndex + 1), 6000);
+  }
+
+  function renderHeroSlider() {
+    const slides = (data.heroSlides || []).filter(s => s && s.image);
+    const wrap = $('#hero-slider');
+    if (!slides.length) { wrap.style.display = 'none'; clearInterval(hsTimer); return; }
+    wrap.style.display = 'block';
+    $('#hs-track').innerHTML = slides.map((s, i) =>
+      '<div class="hs-slide' + (i === 0 ? ' active' : '') + '">' +
+      '<img src="' + s.image + '" alt="' + esc(s.alt || 'Brave Motors vehicle') + '"' + (i === 0 ? '' : ' loading="lazy"') + ' />' +
+      '</div>'
+    ).join('');
+    hsIndex = 0;
+    $('#hs-prev').onclick = () => { hsSet(hsIndex - 1); hsRestartTimer(); };
+    $('#hs-next').onclick = () => { hsSet(hsIndex + 1); hsRestartTimer(); };
+    hsRestartTimer();
+  }
+
   /* ---------- Hero + stats ---------- */
   function renderHero() {
     const c = data.content;
@@ -273,6 +305,7 @@
   });
 
   /* ---------- Init ---------- */
+  renderHeroSlider();
   renderHero();
   renderVehicles();
   renderBlog();

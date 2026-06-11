@@ -8,7 +8,7 @@ The official website for **Brave Motors**, the automotive division of **Brave Gr
 
 | Page | What it shows |
 |---|---|
-| Home | Hero, stats bar, featured vehicles, why-us, group banner, latest blog posts |
+| Home | Auto-cycling hero image slider (6s, manual arrows), stats bar, featured vehicles, why-us, group banner, latest blog posts |
 | Vehicles For Sale | Full stock list with category filters, detail pop-ups and enquiry buttons (prices POA) |
 | Blog | News and buying guides with a built-in article reader |
 | Brave Group Vision | Group vision statement and division pillars |
@@ -20,6 +20,7 @@ The official website for **Brave Motors**, the automotive division of **Brave Gr
 Click **🔒 STAFF LOGIN** in the website footer. Default PIN: **0000** (changeable in Settings).
 
 - **Dashboard** — stock, blog, message and visit stats at a glance
+- **Hero Slider** — add / replace / reorder / delete the homepage hero images (recommended 1672 × 941 px)
 - **Vehicles** — add / edit / delete listings, upload photos, set price, status & featured flag
 - **Blog Posts** — write, edit and delete articles with cover images
 - **Site Content** — edit the hero, stats bar, About page, Vision page and contact details
